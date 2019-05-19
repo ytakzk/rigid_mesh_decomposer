@@ -24,6 +24,9 @@ class Mesh():
         # weld a mesh
         mesh.Weld(math.pi)
 
+        # unify the normals
+        mesh.UnifyNormals()
+
         self.mesh = mesh
 
         self.edges = {}
@@ -238,7 +241,8 @@ class Mesh():
         
         if len(longest_path) == 0:
             longest_path = [first_node]
-        print(longest_path)
+
+
         a = []
         for i in range(len(longest_path)):
             v1 = longest_path[i].index
@@ -343,7 +347,7 @@ class Mesh():
 
                 mesh_2.Faces.AddFace(new_index1, new_index2, new_index3)
 
-        return mesh_1, mesh_2
+        return [mesh_1, mesh_2], [self.mesh.Vertices[i] for i in path_indexes]
 
 
     def thinken(self, thickness=1, joint_type=0, joint_length=1, joint_width=1, origin=None, interval=10):
